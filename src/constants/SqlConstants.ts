@@ -13,4 +13,5 @@ export class SqlConstants {
     public static readonly OPERATOR_NOT_NULL: "NOT NULL" = "NOT NULL";
     public static readonly OPERATOR_NULL: "NULL" = "NULL";
     public static readonly OPERATOR_OR: "OR" = "OR";
+    public static readonly OPERATOR_PG_FTS_SEARCH: "@@" = "@@";
 }

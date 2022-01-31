@@ -36,6 +36,7 @@ export class Query<T extends EntityBase, R extends T | T[], P = T>
     private _queryMode: QueryMode;
     private _queryWhereType: QueryWhereType;
     private _selectedProperty: string;
+    private _pgFtsQuery: string;
 
     /**
      * Constructs a Query wrapper.
@@ -358,6 +359,21 @@ export class Query<T extends EntityBase, R extends T | T[], P = T>
             this._query.orHaving,
             ">",
             conditionPropSelector
+        );
+    }
+
+    public pgFtsSearch(value: string): IQuery<T, R, P> {
+        this._pgFtsQuery = value;
+        return this.completeWhere(SqlConstants.OPERATOR_PG_FTS_SEARCH, value, { quoteString: false }, { matchCase: false });
+    }
+
+    public orderByDescendingTsRank(propertySelector: (obj: P) => any): IQuery<T, R, P> {
+        const propertyName: string = nameof<P>(propertySelector);
+        const orderProperty: string = `${this._lastAlias}.${propertyName}`;
+
+        return this.completeOrderBy(
+            this._query.orderBy,
+            [`ts_rank(${orderProperty}, ${this._pgFtsQuery})`, "DESC"]
         );
     }
 

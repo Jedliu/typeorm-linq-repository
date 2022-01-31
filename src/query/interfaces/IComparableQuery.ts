@@ -94,6 +94,11 @@ export interface IComparableQuery<T extends EntityBase, R extends T | T[], P = T
      */
     lessThanOrEqual(value: number | Date): IQuery<T, R, P>;
     /**
+     * Postgres full text search: @@
+     * @param value The value against which to search.
+     */
+    pgFtsSearch(value: string): IQuery<T, R, P>;
+    /**
      * Joins the specified navigation property for where conditions on that property.
      * @type {S} The type of the joined navigation property.
      * @param propertySelector Property selection lambda for property to join, ex. x => x.prop

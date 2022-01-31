@@ -84,6 +84,12 @@ export interface IQueryBase<T extends EntityBase, R extends T | T[], P = T> {
      */
     orderByDescending(propertySelector: (obj: P) => any, options?: QueryOrderOptions): IQuery<T, R, P>;
     /**
+     * Orders the query on the specified Postgres full text search vector property in descending order.
+     * Wrapped by function ts_rank().
+     * @param propertySelector Property selection lambda for property on which to sort.
+     */
+     orderByDescendingTsRank(propertySelector: (obj: P) => any): IQuery<T, R, P>;
+    /**
      * Returns the query back to its base type while also exiting "join mode",
      * thus ending a join chain so that where conditions may be continued on the base type.
      */

@@ -1,4 +1,5 @@
 import { getTypeormConnection } from "../../../test/connection/get-typeorm-connection.function";
+import { seedArticles } from "./seed-articles.function";
 import { seedArtists } from "./seed-artists.function";
 import { seedGenres } from "./seed-genres.function";
 import { seedSongs } from "./seed-songs.function";
@@ -15,6 +16,7 @@ export async function main(): Promise<void> {
     await seedSongs();
     await seedUsers();
     await seedUserProfileAttributes();
+    await seedArticles();
 
     console.log("Closing connection.");
 
