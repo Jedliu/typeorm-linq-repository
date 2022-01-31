@@ -1,3 +1,14 @@
+# Updates:
+This forked repository includes the updates to support Postgres full text search and ordering.
+Thanks to [IRCraziestTaxi](https://github.com/IRCraziestTaxi).
+```ts
+await articleRepository
+    .getAll()
+    .where(s => s.documentWithWeights)
+    .pgFtsSearch(`websearch_to_tsquery('english','john')`)
+    .orderByDescendingTsRank(s=>s.documentWithWeights);
+```
+
 # typeorm-linq-repository
 Wraps TypeORM repository pattern and QueryBuilder using fluent, LINQ-style queries.
 
