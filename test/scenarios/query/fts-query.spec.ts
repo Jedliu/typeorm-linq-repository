@@ -35,13 +35,6 @@ describe("Query", () => {
         expect(articles.map(a=>a.id).join()).toEqual('2,1,3');
     });
 
-    it("works with Postgres full text search", async () => {
-        let articles = await articleRepository
-            .getAll()
-            .select(s=>s.id);
-        console.log(articles);
-    });
-
     afterAll(async () => {
         await connection.close();
     });
